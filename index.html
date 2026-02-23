@@ -4,155 +4,237 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aqua Plugins</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:'Orbitron',sans-serif;
+background:#0f0f0f;
+color:white;
+overflow-x:hidden;
 }
 
-body {
-    font-family: 'Orbitron', sans-serif;
-    background: #0f0f0f;
-    color: white;
+nav{
+position:fixed;
+width:100%;
+top:0;
+display:flex;
+justify-content:space-between;
+padding:20px 40px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+z-index:1000;
 }
 
-header {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle at center, #1a1a1a 0%, #0f0f0f 70%);
-    text-align: center;
+nav h2{color:#ff7a00}
+
+nav button{
+background:#ff7a00;
+border:none;
+padding:10px 20px;
+cursor:pointer;
+font-weight:bold;
+border-radius:6px;
 }
 
-h1 {
-    font-size: 3.5rem;
-    color: #ff7a00;
-    text-shadow: 0 0 20px #ff7a00;
+header{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:radial-gradient(circle at center,#1a1a1a,#0f0f0f);
 }
 
-.subtitle {
-    margin-top: 20px;
-    color: #ccc;
-    font-size: 1.2rem;
+header h1{
+font-size:4rem;
+color:#ff7a00;
+text-shadow:0 0 30px #ff7a00;
 }
 
-.buttons {
-    margin-top: 40px;
+header p{
+margin-top:20px;
+color:#ccc;
 }
 
-.btn {
-    padding: 15px 35px;
-    margin: 10px;
-    background: #ff7a00;
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 8px;
-    transition: 0.3s;
+.main-btn{
+margin-top:30px;
+padding:15px 40px;
+background:#ff7a00;
+color:black;
+border:none;
+cursor:pointer;
+font-weight:bold;
+border-radius:8px;
 }
 
-.btn:hover {
-    background: #ff9500;
-    box-shadow: 0 0 20px #ff9500;
+section{
+padding:100px 20px;
+text-align:center;
 }
 
-section {
-    padding: 80px 20px;
-    text-align: center;
+.products{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
 }
 
-.section-title {
-    font-size: 2rem;
-    margin-bottom: 40px;
-    color: #ff7a00;
+.card{
+background:#1a1a1a;
+padding:30px;
+width:300px;
+border-radius:12px;
+box-shadow:0 0 20px rgba(255,122,0,0.4);
+transition:0.3s;
 }
 
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 40px #ff7a00;
 }
 
-.card {
-    background: #1a1a1a;
-    margin: 20px;
-    padding: 30px;
-    width: 280px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(255,122,0,0.5);
-    transition: 0.3s;
+.price{
+margin:20px 0;
+font-size:1.5rem;
+color:#ff9500;
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 30px #ff7a00;
+.dashboard{
+display:none;
+padding:120px 20px;
 }
 
-.price {
-    font-size: 1.8rem;
-    margin: 15px 0;
-    color: #ff9500;
+.license-box{
+background:#1a1a1a;
+padding:20px;
+margin:20px auto;
+max-width:500px;
+border-radius:10px;
 }
 
-footer {
-    background: #111;
-    padding: 30px;
-    text-align: center;
-    color: #777;
+footer{
+padding:40px;
+background:#111;
+text-align:center;
+color:#777;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>AQUA PLUGINS</h1>
-    <p class="subtitle">Domine seu servidor com o melhor RankUP do Brasil</p>
+<nav>
+<h2>AQUA PLUGINS</h2>
+<div>
+<button onclick="login()">Login</button>
+<button onclick="openDashboard()">Área do Cliente</button>
+</div>
+</nav>
 
-    <div class="buttons">
-        <a href="#planos" class="btn">Comprar Agora</a>
-        <a href="#produto" class="btn">Ver Produto</a>
-    </div>
+<header>
+<h1>AQUA RANKUP</h1>
+<p>O plugin mais completo para servidores RankUP</p>
+<button class="main-btn" onclick="scrollToProducts()">Comprar Agora</button>
 </header>
 
-<section id="produto">
-    <h2 class="section-title">AquaRankUP</h2>
-    <p>Plugin completo para servidores RankUP e OP Prison.</p>
+<section id="produtos">
+<h2>Produtos</h2>
+<br><br>
+<div class="products">
+<div class="card">
+<h3>AquaRankUP PRO</h3>
+<div class="price">R$59,90</div>
+<button class="main-btn" onclick="checkout()">Comprar</button>
+</div>
+
+<div class="card">
+<h3>AquaRankUP Enterprise</h3>
+<div class="price">R$129,90</div>
+<button class="main-btn" onclick="checkout()">Comprar</button>
+</div>
+</div>
 </section>
 
-<section id="planos">
-    <h2 class="section-title">Planos</h2>
+<section class="dashboard" id="dashboard">
+<h2>Painel do Cliente</h2>
 
-    <div class="cards">
+<div class="license-box">
+<h3>Suas Licenças</h3>
+<p id="licenseList">Nenhuma licença ativa.</p>
+<button class="main-btn" onclick="generateLicense()">Gerar Licença</button>
+</div>
 
-        <div class="card">
-            <h3>Básico</h3>
-            <div class="price">R$29,90</div>
-            <p>Licença para 1 servidor</p>
-            <br>
-            <a href="#" class="btn">Comprar</a>
-        </div>
-
-        <div class="card">
-            <h3>PRO</h3>
-            <div class="price">R$59,90</div>
-            <p>Licença ilimitada + suporte</p>
-            <br>
-            <a href="#" class="btn">Comprar</a>
-        </div>
-
-    </div>
+<button class="main-btn" onclick="logout()">Sair</button>
 </section>
 
 <footer>
-© 2026 Aqua Plugins - Todos os direitos reservados.
+© 2026 Aqua Plugins - Todos os direitos reservados
 </footer>
+
+<script>
+
+let logged = false;
+
+function login(){
+Swal.fire({
+title:"Login",
+input:"text",
+inputPlaceholder:"Digite qualquer nome",
+showCancelButton:true
+}).then((result)=>{
+if(result.value){
+logged = true;
+Swal.fire("Logado com sucesso!");
+}
+});
+}
+
+function openDashboard(){
+if(!logged){
+Swal.fire("Você precisa fazer login!");
+return;
+}
+document.getElementById("dashboard").style.display="block";
+window.scrollTo({top:document.getElementById("dashboard").offsetTop,behavior:"smooth"});
+}
+
+function logout(){
+logged=false;
+document.getElementById("dashboard").style.display="none";
+Swal.fire("Deslogado!");
+}
+
+function generateLicense(){
+let key = "AQUA-" + Math.random().toString(36).substring(2,10).toUpperCase();
+document.getElementById("licenseList").innerHTML = key;
+}
+
+function checkout(){
+Swal.fire({
+title:"Escolha o pagamento",
+showDenyButton:true,
+showCancelButton:true,
+confirmButtonText:"MercadoPago PIX",
+denyButtonText:"PayPal"
+}).then((result)=>{
+if(result.isConfirmed){
+Swal.fire("Pagamento PIX simulado com sucesso!");
+}
+else if(result.isDenied){
+Swal.fire("Pagamento PayPal simulado com sucesso!");
+}
+});
+}
+
+function scrollToProducts(){
+document.getElementById("produtos").scrollIntoView({behavior:"smooth"});
+}
+
+</script>
 
 </body>
 </html>
