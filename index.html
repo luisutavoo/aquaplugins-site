@@ -3,123 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aqua Plugins</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<title>Aqua Plugins Marketplace</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
-font-family:'Orbitron',sans-serif;
-background:#0f0f0f;
-color:white;
-overflow-x:hidden;
+font-family:'Inter',sans-serif;
+background:#111315;
+color:#fff;
 }
 
-nav{
+header{
 position:fixed;
-width:100%;
 top:0;
+width:100%;
+background:#1a1d21;
+padding:15px 40px;
 display:flex;
 justify-content:space-between;
-padding:20px 40px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
+align-items:center;
+border-bottom:1px solid #2a2d32;
 z-index:1000;
 }
 
-nav h2{color:#ff7a00}
+.logo{
+font-weight:700;
+font-size:20px;
+color:#ff7a00;
+}
+
+nav input{
+padding:8px 15px;
+background:#2a2d32;
+border:none;
+border-radius:6px;
+color:#fff;
+width:250px;
+}
 
 nav button{
 background:#ff7a00;
 border:none;
-padding:10px 20px;
-cursor:pointer;
-font-weight:bold;
+padding:8px 15px;
+margin-left:10px;
 border-radius:6px;
-}
-
-header{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:radial-gradient(circle at center,#1a1a1a,#0f0f0f);
-}
-
-header h1{
-font-size:4rem;
-color:#ff7a00;
-text-shadow:0 0 30px #ff7a00;
-}
-
-header p{
-margin-top:20px;
-color:#ccc;
-}
-
-.main-btn{
-margin-top:30px;
-padding:15px 40px;
-background:#ff7a00;
-color:black;
-border:none;
 cursor:pointer;
-font-weight:bold;
-border-radius:8px;
+font-weight:600;
 }
 
-section{
-padding:100px 20px;
-text-align:center;
-}
-
-.products{
+.container{
+margin-top:90px;
 display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:30px;
+}
+
+.sidebar{
+width:250px;
+background:#1a1d21;
+padding:20px;
+border-right:1px solid #2a2d32;
+height:100vh;
+position:fixed;
+}
+
+.sidebar h3{
+margin-bottom:15px;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar li{
+margin:10px 0;
+color:#aaa;
+cursor:pointer;
+}
+
+.main{
+margin-left:250px;
+padding:40px;
+flex:1;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+gap:25px;
 }
 
 .card{
-background:#1a1a1a;
-padding:30px;
-width:300px;
-border-radius:12px;
-box-shadow:0 0 20px rgba(255,122,0,0.4);
-transition:0.3s;
+background:#1a1d21;
+border-radius:10px;
+overflow:hidden;
+border:1px solid #2a2d32;
+transition:0.2s;
+cursor:pointer;
 }
 
 .card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 40px #ff7a00;
+transform:translateY(-5px);
+border-color:#ff7a00;
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+background:#222;
+}
+
+.card-content{
+padding:15px;
+}
+
+.card h4{
+margin-bottom:10px;
 }
 
 .price{
-margin:20px 0;
-font-size:1.5rem;
-color:#ff9500;
+color:#ff7a00;
+font-weight:600;
+margin:10px 0;
+}
+
+.card button{
+width:100%;
+padding:8px;
+background:#ff7a00;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:#1a1d21;
+padding:30px;
+border-radius:10px;
+width:400px;
 }
 
 .dashboard{
 display:none;
-padding:120px 20px;
-}
-
-.license-box{
-background:#1a1a1a;
-padding:20px;
-margin:20px auto;
-max-width:500px;
-border-radius:10px;
+padding:40px;
 }
 
 footer{
 padding:40px;
-background:#111;
 text-align:center;
+background:#1a1d21;
+margin-top:50px;
 color:#777;
 }
 </style>
@@ -127,111 +175,116 @@ color:#777;
 
 <body>
 
+<header>
+<div class="logo">AQUA PLUGINS</div>
 <nav>
-<h2>AQUA PLUGINS</h2>
-<div>
+<input type="text" placeholder="Buscar plugins...">
 <button onclick="login()">Login</button>
 <button onclick="openDashboard()">Área do Cliente</button>
-</div>
 </nav>
-
-<header>
-<h1>AQUA RANKUP</h1>
-<p>O plugin mais completo para servidores RankUP</p>
-<button class="main-btn" onclick="scrollToProducts()">Comprar Agora</button>
 </header>
 
-<section id="produtos">
-<h2>Produtos</h2>
-<br><br>
-<div class="products">
-<div class="card">
-<h3>AquaRankUP PRO</h3>
+<div class="container">
+
+<div class="sidebar">
+<h3>Categorias</h3>
+<ul>
+<li>RankUP</li>
+<li>Prison</li>
+<li>Core</li>
+<li>Economia</li>
+<li>API</li>
+</ul>
+</div>
+
+<div class="main">
+<h2>Plugins em Destaque</h2>
+<br>
+
+<div class="grid">
+
+<div class="card" onclick="openProduct()">
+<img src="https://via.placeholder.com/400x150">
+<div class="card-content">
+<h4>AquaRankUP PRO</h4>
+<p>Sistema completo de progressão</p>
 <div class="price">R$59,90</div>
-<button class="main-btn" onclick="checkout()">Comprar</button>
+<button>Comprar</button>
+</div>
 </div>
 
 <div class="card">
-<h3>AquaRankUP Enterprise</h3>
-<div class="price">R$129,90</div>
-<button class="main-btn" onclick="checkout()">Comprar</button>
+<img src="https://via.placeholder.com/400x150">
+<div class="card-content">
+<h4>AquaCore</h4>
+<p>Core principal otimizado</p>
+<div class="price">R$79,90</div>
+<button onclick="checkout()">Comprar</button>
 </div>
 </div>
-</section>
 
-<section class="dashboard" id="dashboard">
+</div>
+</div>
+</div>
+
+<div class="dashboard" id="dashboard">
 <h2>Painel do Cliente</h2>
-
-<div class="license-box">
-<h3>Suas Licenças</h3>
-<p id="licenseList">Nenhuma licença ativa.</p>
-<button class="main-btn" onclick="generateLicense()">Gerar Licença</button>
+<br>
+<p>Licenças Ativas:</p>
+<div id="licenses">Nenhuma licença ativa.</div>
+<br>
+<button onclick="generateLicense()">Gerar Licença</button>
 </div>
 
-<button class="main-btn" onclick="logout()">Sair</button>
-</section>
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3>AquaRankUP PRO</h3>
+<p>Plugin completo para servidores RankUP.</p>
+<br>
+<button onclick="checkout()">Comprar via MercadoPago</button>
+<button onclick="checkout()">Comprar via PayPal</button>
+<br><br>
+<button onclick="closeModal()">Fechar</button>
+</div>
+</div>
 
 <footer>
-© 2026 Aqua Plugins - Todos os direitos reservados
+© 2026 Aqua Plugins Marketplace
 </footer>
 
 <script>
 
-let logged = false;
+let logged=false;
 
 function login(){
-Swal.fire({
-title:"Login",
-input:"text",
-inputPlaceholder:"Digite qualquer nome",
-showCancelButton:true
-}).then((result)=>{
-if(result.value){
-logged = true;
-Swal.fire("Logado com sucesso!");
-}
-});
+logged=true;
+alert("Login realizado (simulado)");
 }
 
 function openDashboard(){
 if(!logged){
-Swal.fire("Você precisa fazer login!");
+alert("Faça login primeiro!");
 return;
 }
 document.getElementById("dashboard").style.display="block";
-window.scrollTo({top:document.getElementById("dashboard").offsetTop,behavior:"smooth"});
-}
-
-function logout(){
-logged=false;
-document.getElementById("dashboard").style.display="none";
-Swal.fire("Deslogado!");
+window.scrollTo(0,document.body.scrollHeight);
 }
 
 function generateLicense(){
-let key = "AQUA-" + Math.random().toString(36).substring(2,10).toUpperCase();
-document.getElementById("licenseList").innerHTML = key;
+let key="AQUA-"+Math.random().toString(36).substring(2,10).toUpperCase();
+document.getElementById("licenses").innerText=key;
+}
+
+function openProduct(){
+document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
 }
 
 function checkout(){
-Swal.fire({
-title:"Escolha o pagamento",
-showDenyButton:true,
-showCancelButton:true,
-confirmButtonText:"MercadoPago PIX",
-denyButtonText:"PayPal"
-}).then((result)=>{
-if(result.isConfirmed){
-Swal.fire("Pagamento PIX simulado com sucesso!");
-}
-else if(result.isDenied){
-Swal.fire("Pagamento PayPal simulado com sucesso!");
-}
-});
-}
-
-function scrollToProducts(){
-document.getElementById("produtos").scrollIntoView({behavior:"smooth"});
+alert("Pagamento simulado com sucesso!");
 }
 
 </script>
