@@ -3,103 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AQUA PLUGINS - SaaS</title>
-<link rel="stylesheet" href="style.css">
+<title>Aqua Plugins</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: #0f0f0f;
+    color: white;
+}
+
+header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #0f0f0f 70%);
+    text-align: center;
+}
+
+h1 {
+    font-size: 3.5rem;
+    color: #ff7a00;
+    text-shadow: 0 0 20px #ff7a00;
+}
+
+.subtitle {
+    margin-top: 20px;
+    color: #ccc;
+    font-size: 1.2rem;
+}
+
+.buttons {
+    margin-top: 40px;
+}
+
+.btn {
+    padding: 15px 35px;
+    margin: 10px;
+    background: #ff7a00;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #ff9500;
+    box-shadow: 0 0 20px #ff9500;
+}
+
+section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #ff7a00;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: #1a1a1a;
+    margin: 20px;
+    padding: 30px;
+    width: 280px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255,122,0,0.5);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px #ff7a00;
+}
+
+.price {
+    font-size: 1.8rem;
+    margin: 15px 0;
+    color: #ff9500;
+}
+
+footer {
+    background: #111;
+    padding: 30px;
+    text-align: center;
+    color: #777;
+}
+</style>
 </head>
+
 <body>
 
-<header class="navbar">
-  <div class="logo">AQUA PLUGINS</div>
-  <div>
-    <button class="btn-outline" onclick="showLogin()">Login</button>
-  </div>
+<header>
+    <h1>AQUA PLUGINS</h1>
+    <p class="subtitle">Domine seu servidor com o melhor RankUP do Brasil</p>
+
+    <div class="buttons">
+        <a href="#planos" class="btn">Comprar Agora</a>
+        <a href="#produto" class="btn">Ver Produto</a>
+    </div>
 </header>
 
-<section class="hero">
-  <h1>Plugins Premium com Licenciamento Inteligente</h1>
-  <p>Plataforma SaaS profissional para servidores Minecraft</p>
-  <button class="btn" onclick="scrollToPlans()">Ver Planos</button>
+<section id="produto">
+    <h2 class="section-title">AquaRankUP</h2>
+    <p>Plugin completo para servidores RankUP e OP Prison.</p>
 </section>
 
-<section id="plans" class="plans">
-  <h2>Planos</h2>
-  <div class="plan-card">
-    <h3>Mensal</h3>
-    <p>R$49/mês</p>
-    <button class="btn" onclick="alert('Integrar com checkout')">Assinar</button>
-  </div>
-  <div class="plan-card highlight">
-    <h3>Anual</h3>
-    <p>R$397/ano</p>
-    <button class="btn" onclick="alert('Integrar com checkout')">Assinar</button>
-  </div>
-  <div class="plan-card">
-    <h3>Vitalício</h3>
-    <p>R$697</p>
-    <button class="btn" onclick="alert('Integrar com checkout')">Comprar</button>
-  </div>
+<section id="planos">
+    <h2 class="section-title">Planos</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Básico</h3>
+            <div class="price">R$29,90</div>
+            <p>Licença para 1 servidor</p>
+            <br>
+            <a href="#" class="btn">Comprar</a>
+        </div>
+
+        <div class="card">
+            <h3>PRO</h3>
+            <div class="price">R$59,90</div>
+            <p>Licença ilimitada + suporte</p>
+            <br>
+            <a href="#" class="btn">Comprar</a>
+        </div>
+
+    </div>
 </section>
-
-<section class="license-test">
-  <h2>Testar API de Licença</h2>
-  <button class="btn" onclick="generateLicense()">Gerar Licença</button>
-  <p id="licenseResult"></p>
-
-  <input id="licenseInput" placeholder="Digite a licença">
-  <button class="btn-outline" onclick="validateLicense()">Validar</button>
-  <p id="validationResult"></p>
-</section>
-
-<div id="loginModal" class="modal">
-  <div class="modal-content">
-    <h2>Login</h2>
-    <input placeholder="Email">
-    <input placeholder="Senha" type="password">
-    <button class="btn">Entrar</button>
-    <button class="btn-outline" onclick="closeLogin()">Fechar</button>
-  </div>
-</div>
 
 <footer>
-  © 2026 AQUA PLUGINS - Plataforma SaaS
+© 2026 Aqua Plugins - Todos os direitos reservados.
 </footer>
-
-<script>
-const API_URL = "https://SUAAPI.squarecloud.app";
-
-function scrollToPlans(){
-  document.getElementById("plans").scrollIntoView({behavior:"smooth"});
-}
-
-function showLogin(){
-  document.getElementById("loginModal").style.display = "flex";
-}
-
-function closeLogin(){
-  document.getElementById("loginModal").style.display = "none";
-}
-
-async function generateLicense(){
-  const res = await fetch(API_URL + "/api/generate-license",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({product:"AquaRankUP"})
-  });
-  const data = await res.json();
-  document.getElementById("licenseResult").innerText = data.license_key || "Erro na API";
-}
-
-async function validateLicense(){
-  const key = document.getElementById("licenseInput").value;
-  const res = await fetch(API_URL + "/api/validate-license",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({license_key:key, domain:"githubpages.com"})
-  });
-  const data = await res.json();
-  document.getElementById("validationResult").innerText = data.valid ? "Licença válida" : "Inválida";
-}
-</script>
 
 </body>
 </html>
