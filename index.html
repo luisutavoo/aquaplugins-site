@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQUA PLUGINS - SaaS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">AQUA PLUGINS</div>
+  <div>
+    <button class="btn-outline" onclick="showLogin()">Login</button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Plugins Premium com Licenciamento Inteligente</h1>
+  <p>Plataforma SaaS profissional para servidores Minecraft</p>
+  <button class="btn" onclick="scrollToPlans()">Ver Planos</button>
+</section>
+
+<section id="plans" class="plans">
+  <h2>Planos</h2>
+  <div class="plan-card">
+    <h3>Mensal</h3>
+    <p>R$49/mês</p>
+    <button class="btn" onclick="alert('Integrar com checkout')">Assinar</button>
+  </div>
+  <div class="plan-card highlight">
+    <h3>Anual</h3>
+    <p>R$397/ano</p>
+    <button class="btn" onclick="alert('Integrar com checkout')">Assinar</button>
+  </div>
+  <div class="plan-card">
+    <h3>Vitalício</h3>
+    <p>R$697</p>
+    <button class="btn" onclick="alert('Integrar com checkout')">Comprar</button>
+  </div>
+</section>
+
+<section class="license-test">
+  <h2>Testar API de Licença</h2>
+  <button class="btn" onclick="generateLicense()">Gerar Licença</button>
+  <p id="licenseResult"></p>
+
+  <input id="licenseInput" placeholder="Digite a licença">
+  <button class="btn-outline" onclick="validateLicense()">Validar</button>
+  <p id="validationResult"></p>
+</section>
+
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <h2>Login</h2>
+    <input placeholder="Email">
+    <input placeholder="Senha" type="password">
+    <button class="btn">Entrar</button>
+    <button class="btn-outline" onclick="closeLogin()">Fechar</button>
+  </div>
+</div>
+
+<footer>
+  © 2026 AQUA PLUGINS - Plataforma SaaS
+</footer>
+
+<script>
+const API_URL = "https://SUAAPI.squarecloud.app";
+
+function scrollToPlans(){
+  document.getElementById("plans").scrollIntoView({behavior:"smooth"});
+}
+
+function showLogin(){
+  document.getElementById("loginModal").style.display = "flex";
+}
+
+function closeLogin(){
+  document.getElementById("loginModal").style.display = "none";
+}
+
+async function generateLicense(){
+  const res = await fetch(API_URL + "/api/generate-license",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({product:"AquaRankUP"})
+  });
+  const data = await res.json();
+  document.getElementById("licenseResult").innerText = data.license_key || "Erro na API";
+}
+
+async function validateLicense(){
+  const key = document.getElementById("licenseInput").value;
+  const res = await fetch(API_URL + "/api/validate-license",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({license_key:key, domain:"githubpages.com"})
+  });
+  const data = await res.json();
+  document.getElementById("validationResult").innerText = data.valid ? "Licença válida" : "Inválida";
+}
+</script>
+
+</body>
+</html>
